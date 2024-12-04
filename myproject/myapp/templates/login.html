@@ -1,0 +1,110 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - TechWaste Reclaim</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container for form */
+        .login-container {
+            background-color: #ffffff;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 90%;
+            max-width: 400px;
+            padding: 20px;
+        }
+
+        /* Title */
+        .login-container h1 {
+            color: #007bff;
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: #000000;
+            font-size: 15px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        /* Input fields */
+        .login-container input[type="email"],
+        .login-container input[type="password"] {
+            width: 80%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px; /* Adjusted font size */
+        }
+
+        /* Checkbox */
+        .login-container label {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        /* Login button */
+        .login-container button {
+            width: 30%; /* Adjusted width */
+            padding: 12px;
+            background-color: #023def;
+            color: white;
+            font-size: 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto; /* Center button */
+            display: block; /* Make it a block element for centering */
+        }
+
+        .login-container button:hover {
+            background-color: #0126b3;
+        }
+
+        
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <h2>Welcome to TechWaste Reclaim</h2>
+        <form action="/login" method="POST">
+            {%csrf_token%}
+            <input type="email" name="email" placeholder="Email or Phone Number" required>
+            <input type="password" name="password" placeholder="Enter Your Password" required>
+            <label>
+                <input type="checkbox" name="remember_me"> Remember Me
+            </label>
+            <button type="submit">Login</button>
+        </form>
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <p>Don't have an account? <a href="/signup" class="signup-link">Sign Up</a></p>
+        {% if messages %}
+        <div>
+            {% for message in messages %}
+                <p style="color: red;">{{ message }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
+{% endblock content %}

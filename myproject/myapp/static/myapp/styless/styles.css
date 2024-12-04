@@ -1,0 +1,301 @@
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f5f5f5;
+  color: #333;
+}
+
+/* Landing Page Container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 20px;
+  background-color: #fefefe;
+}
+
+/* Header Section */
+.header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+.logo {
+  position: absolute; 
+  top: 20px; 
+  left: 20px; 
+  z-index: 1000; 
+}
+
+.logo img {
+  width: 100px; 
+  height: auto; 
+}
+
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Content Section */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Text Section */
+.text-section {
+  flex: 1;
+  max-width: 500px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 300;
+  color: #666;
+}
+
+.main-title {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 10px 0;
+}
+
+.highlight {
+  color: #0000ff;
+  font-weight: 700;
+}
+
+.action-buttons {
+  margin-top: 20px;
+}
+
+.join-now {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #28a745;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.join-now:hover {
+  background-color: #218838;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #666;
+}
+
+.login-link a {
+  color: #0000ff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Image Section */
+.image-section {
+  flex: 1;
+  text-align: center;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 650px;
+  object-fit: cover;
+}
+
+/*signup
+
+/* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+/* Container */
+.container {
+  display: flex;
+  width: 90%;
+  max-width: 1200px;
+  background: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.image-section {
+  flex: 1;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-color: #f8f9fa;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.image-section img {
+  position: absolute;
+  bottom: 0;
+  height: 50%;
+  object-fit: contain;
+}
+
+/* Form Section */
+.form-section {
+  flex: 1;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  max-width: 400px;
+  width: 100%;
+}
+
+.form-container h2 {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.form-container p {
+  font-size: 14px;
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  padding: 12px 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+button.signup-button {
+  width: 100%;
+  background-color: #007bff;
+  color: #fff;
+  padding: 12px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+button.signup-button:hover {
+  background-color: #0056b3;
+}
+
+/* Social Buttons */
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0;
+}
+
+.separator hr {
+  width: 40%;
+  border: none;
+  border-top: 1px solid #ddd;
+}
+
+.separator span {
+  font-size: 12px;
+  color: #666;
+}
+
+.social-button {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.facebook {
+  background-color: #3b5998;
+  color: #fff;
+}
+
+.facebook:hover {
+  background-color: #2d4373;
+}
+
+.google {
+  background-color: #db4437;
+  color: #fff;
+}
+
+.google:hover {
+  background-color: #a33d2e;
+}
+
+/* Login Link */
+.login-link {
+  font-size: 12px;
+  text-align: center;
+  margin-top: 10px;
+  color: #666;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}

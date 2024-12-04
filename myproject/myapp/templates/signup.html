@@ -1,0 +1,222 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechWaste Reclaim</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      display: flex;
+      width: 90%;
+      max-width: 1200px;
+      background: url("{% static 'myapp/image/nty.png' %}") no-repeat center center; 
+      background-size: cover; 
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      min-height: 100vh; /* Allow for expansion */
+    }
+    
+    .form-section {
+      flex: 1; /* Allows space to grow */
+      min-height: 100%;
+      padding: 40px 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(255, 255, 255, 0.8);
+      border-radius: 8px;
+    }
+
+    /* Form Section */
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      max-width: 400px;
+      width: 100%;
+      padding: 20px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    fieldset {
+      border: none;
+    }
+    
+    legend {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    
+    label {
+      margin: 10px 0 5px;
+      font-weight: 600;
+    }
+    
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="password"],
+    select {
+      width: 100%;
+      padding: 12px 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+    
+    button.signup-button {
+      width: 100%;
+      background-color: #007bff;
+      color: #fff;
+      padding: 12px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    
+    button.signup-button:hover {
+      background-color: #0056b3;
+    }
+    
+    .separator {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    
+    .separator hr {
+      width: 40%;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+    
+    .separator span {
+      font-size: 12px;
+      color: #666;
+    }
+    
+    button.social-button {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 10px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    
+    .social-button.facebook {
+      color: #fff;
+    }
+    
+    .social-button.facebook:hover {
+      background-color: #2d4373;
+    }
+    
+    .social-button.google {
+      color: #fff;
+    }
+    
+    .social-button.google:hover {
+      background-color: #a33d2e;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="form-section">
+      <div class="form-container">
+        <h2>Create an Account</h2>
+        {% if messages %}
+<div>
+    {% for message in messages %}
+        <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+</div>
+{% endif %}
+        <form action="{% url 'signup' %}" method="POST">
+          {% csrf_token %}
+          <fieldset>
+            <legend>Create Your Account</legend>
+            <label for="username">Full Name</label>
+            <input type="text" id="name" name="username" placeholder="Enter Your Username" required>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter Your Email" required>
+        
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter Your Password" required>
+            <label for="password">Confirm Password</label>
+            <input type="password" id="password" name="Confirm_password" placeholder="Enter Your Password" required>
+        
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="Enter Your Phone Number" required>
+        
+            <label for="userrole">User Role</label>
+            <select id="userrole" name="userrole" required>
+              <option value="" disabled selected>Select Your Role</option>
+              <option value="admin">Admin</option>
+              <option value="agent">Agent</option>
+              <option value="client">Client</option>
+            </select>
+        
+            <label for="district">District</label>
+            <input type="text" id="district" name="district" placeholder="Enter Your District" required>
+        
+            <label for="sector">Sector</label>
+            <input type="text" id="sector" name="sector" placeholder="Enter Your Sector" required>
+        
+            <label for="cell">Cell</label>
+            <input type="text" id="cell" name="cell" placeholder="Enter Your Cell" required>
+        
+            <label for="village">Village</label>
+            <input type="text" name="village" placeholder="Enter your village" required>
+        
+            <button type="submit" class="signup-button">Sign Up</button>
+        
+            <div class="separator">
+              <hr>
+              <span>Or With</span>
+              <hr>
+            </div>
+        
+            <button type="button" class="social-button facebook">Signup with Facebook</button>
+            <button type="button" class="social-button google">Signup with Google</button>
+          </fieldset>
+        </form>
+
+        <p class="login-link">Already have an account? <a href="{% url 'login' %}">Login</a></p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+{% endblock content %}

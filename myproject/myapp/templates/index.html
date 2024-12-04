@@ -1,0 +1,164 @@
+
+{% load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landing Page - TechWaste Reclaim</title>
+  <style>
+    /* styles.css */
+
+/* General Reset */
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Landing Page Container */
+.landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8, #d4e4f7);
+  color: #333;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 30px;
+}
+
+.logo img {
+  height: 50px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #007bff;
+  text-transform: uppercase;
+}
+
+/* Content Section */
+.content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 90%;
+  max-width: 1200px;
+}
+
+/* Text Section */
+.text-section {
+  flex: 1;
+  margin-right: 20px;
+}
+
+.subtitle {
+  font-size: 18px;
+  font-weight: 400;
+  color: #555;
+}
+
+.main-title {
+  font-size: 36px;
+  font-weight: 600;
+  line-height: 1.4;
+  margin: 15px 0;
+  color: #333;
+}
+
+.highlight {
+  color: #007bff;
+  font-weight: 600;
+}
+
+/* Buttons */
+.action-buttons {
+  margin-top: 20px;
+}
+
+.join-now {
+  display: inline-block;
+  background: #007bff;
+  color: #fff;
+  padding: 12px 20px;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.join-now:hover {
+  background: #0056b3;
+}
+
+.login-link {
+  margin-top: 10px;
+  font-size: 14px;
+}
+
+.login-link a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.login-link a:hover {
+  text-decoration: underline;
+}
+
+/* Image Section */
+.image-section {
+  flex: 1;
+  text-align: center;
+}
+
+.image-section img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+  </style>
+</head>
+<body>
+  <div class="landing-container">
+    <header class="header">
+      <div class="logo">
+        <img src="{%static 'myapp/image/logo.jpg'%}" alt="TechWaste Logo">
+      </div>
+      <h1 class="title">TECHWASTERECLAIM</h1>
+    </header>
+
+    <div class="content">
+      <div class="text-section">
+        <p class="subtitle">The most comprehensive</p>
+        <h2 class="main-title">
+          Wastes collection at <br>
+          <span class="highlight">TECHWASTE</span> Reclaim
+        </h2>
+        <div class="action-buttons">
+          <a href={%url 'login'%} class="join-now">Join Us Now</a>
+          <p class="login-link">Already have an account? <a href="{%url 'login'%}">Log In</a></p>
+        </div>
+      </div>
+      <div class="image-section">
+        <img src="{%static 'myapp/image/nty.png'%}" alt=" ">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+
+{%endblock content%}

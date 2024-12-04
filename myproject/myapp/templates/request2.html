@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechWasteReclaim</title>
+  <style>
+    /* General Styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .container {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+    /* Categories Section */
+    .categories h2 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .category-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .category-buttons button {
+      padding: 10px 20px;
+      border: 2px solid #000;
+      border-radius: 20px;
+      background-color: transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .category-buttons button:hover {
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Upload Section */
+    .upload-section {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .upload-box {
+      margin-top: 10px;
+      padding: 20px;
+      border: 2px dashed #000;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    .upload-box input[type="file"] {
+      display: none;
+    }
+
+    .upload-label span {
+      display: block;
+      font-size: 1rem;
+    }
+
+    /* Location Section */
+    .location-section {
+      text-align: center;
+    }
+
+    .location-section p {
+      margin-bottom: 10px;
+    }
+
+    .address-input {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .location-btn, .send-btn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px 20px;
+      border: none;
+      background-color: #28a745;
+      color: #fff;
+      font-size: 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .location-btn:hover, .send-btn:hover {
+      background-color: #218838;
+    }
+
+    /* Footer Illustration */
+    footer .illustration {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>TECHWASTERECLAIM</h1>
+    </header>
+    
+    <main>
+      <section class="categories">
+        <h2>Select Categories:</h2>
+        <div class="category-buttons">
+          <button>Laptop</button>
+          <button>Television</button>
+          <button>Radio</button>
+          <button>Iron</button>
+          <button>Refrigerator</button>
+          <button>Air Conditioner</button>
+          <button>Rice Cooker</button>
+        </div>
+      </section>
+      
+      <section class="upload-section">
+        <h3>Click to upload a picture</h3>
+        <div class="upload-box">
+          <label for="file-upload" class="upload-label">
+            <span>Click to upload a picture OR</span>
+            <input type="file" id="file-upload" />
+          </label>
+        </div>
+      </section>
+      
+      <section class="location-section">
+        <h3>Waste Drop Off</h3>
+        <p>Here’s the part where you have to transport the waste to the dumpster closest to you.</p>
+        <input type="text" id="address-input" placeholder="Enter your address manually (optional)" class="address-input" />
+        <button id="location-btn" class="location-btn">Browse Location</button>
+        <button class="send-btn">Send</button>
+      </section>
+    </main>
+    
+    <footer>
+      <div class="illustration">
+        <img src=" ">
+        <p>Placeholder for the illustration</p>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    // Handle location browsing and sharing
+    document.getElementById("location-btn").addEventListener("click", () => {
+      // Check if Geolocation is supported/enabled
+      if (navigator.geolocation) {
+        // Get the user's location
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const latitude = position.coords.latitude;
+            const longitude = position.coords.longitude;
+
+            // Generate a Google Maps link with the user's location
+            const googleMapsLink = https://www.google.com/maps/@-1.9604748,30.0580062,14.71z?entry=ttu&g_ep=EgoyMDI0MTEyNC4xIKXMDSoASAFQAw%3D%3D=${latitude},${longitude};
+
+            // Open the location in a new tab
+            window.open(googleMapsLink, "_blank");
+          },
+          (error) => {
+            // Handle errors (e.g., user denies location access)
+            alert("Unable to retrieve location. Please allow location access or enter manually.");
+            console.error("Error occurred: ", error);
+          }
+        );
+      } else {
+        alert("Geolocation is not supported by your browser.");
+      }
+    });
+  </script>
+</body>
+</html>

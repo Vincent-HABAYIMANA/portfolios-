@@ -1,0 +1,224 @@
+{% load static %}
+{%block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TechWaste Reclaim</title>
+ <style>
+  /* General Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Header Section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border-bottom: 2px solid #ccc;
+}
+
+.logo img {
+  height: 80px;
+}
+
+.title {
+  font-size: 24px;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: #000;
+}
+
+.user-icons {
+  display: flex;
+  gap: 20px;
+}
+
+.user {
+  text-align: center;
+  font-size: 14px;
+}
+
+.user img {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 5px;
+}
+
+/* Main Section */
+.main {
+  margin-top: 20px;
+}
+
+.info-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  background-color: #fff;
+}
+
+.info-text h2 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 1.5;
+  color: #000;
+}
+
+.info-text p {
+  font-size: 16px;
+  margin: 10px 0;
+  color: #666;
+}
+
+.button-box {
+  margin-top: 20px;
+}
+
+.pickup-button {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.pickup-button:hover {
+  background-color: #0056b3;
+}
+
+.info-image img {
+  max-width: 100%;
+  height: auto;
+  opacity: 0.2;
+}
+
+/* Services Section */
+.services {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.services h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: space-around;
+}
+
+.service-card {
+  text-align: center;
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 15px;
+  border-radius: 10px;
+  width: 150px;
+  transition: transform 0.3s;
+}
+
+.service-card img {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 10px;
+}
+
+.service-card p {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.service-card:hover {
+  transform: translateY(-5px);
+  border-color: #007bff;
+}
+
+ </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Header Section -->
+    <header class="header">
+      <div class="logo">
+        <img src="{%static 'myapp/image/logo.jpg'%}" alt="TechWaste Logo">
+      </div>
+      <h1 class="title">TECHWASTERECLAIM</h1>
+      <div class="user-icons">
+        <div class="user client">
+          <img src="client.png" alt=" ">
+          <span>Client</span>
+        </div>
+        <div class="user admin">
+          <img src="admin.png" alt=" ">
+          <span>Admin</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Section -->
+    <main class="main">
+      <div class="info-box">
+        <div class="info-text">
+          <h2>How you can <br> Earn reward for <br> Recycling</h2>
+          <p>With you, we will help ecology</p>
+          <div class="button-box">
+            <button class="pickup-button">
+              My Waste pick up <br>
+              <span>Request for pick up</span>
+            </button>
+          </div>
+        </div>
+        <div class="info-image">
+          <img src="{%static 'myapp/image/recy.jpg'%}" alt="Recycling Bin">
+        </div>
+      </div>
+
+      <!-- Services Section -->
+      <section class="services">
+        <h3>More services</h3>
+        <div class="service-cards">
+          <div class="service-card"><a herf="{%url 'request1'%}">
+            <img src="{%static 'myapp/image/waste.jpg'%}" alt="Pick Waste Icon">
+            <p>Pick waste</p></a>
+          </div>
+          <div class="service-card">
+            <img src="{%static 'myapp/image/moni.jpg'%}" alt="Get Money Icon">
+            <p>Get money</p>
+          </div>
+          <div class="service-card">
+            <img src="{%static 'myapp/image/pick.jpg'%}" alt="Recycling Icon">
+            <p>Recycling</p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+</body>
+</html>
+{%endblock content%}
