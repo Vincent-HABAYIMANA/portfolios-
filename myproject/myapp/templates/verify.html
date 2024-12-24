@@ -1,94 +1,110 @@
-
 {% load static %}
-{%block content%}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>TechWasteReclaim</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      flex-direction: column;
-    }
-    
-    .container {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-    }
-    
-    .logo-section {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-    }
-    
-    .logo {
-      width: 150px;
-      height: auto;
-    }
-    
-    .main-content {
-      margin-top: 100px;
-    }
-    
-    h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      color: #333;
-      margin-top: 50px;
-    }
-    
-    .verification-message h3 {
-      font-size: 1.5rem;
-      margin-top: 20px;
-      color: #333;
-    }
-    
-    .verification-message p {
-      font-size: 1rem;
-      color: #777;
-      margin-top: 10px;
-    }
-    
-    a {
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      font-size: 1rem;
-      cursor: pointer;
-      margin-top: 20px;
-      border-radius: 5px;
-    }
-    
-    a:hover {
-      background-color: #45a049;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWaste Reclaim</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header Styles */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #333; /* Dark background */
+            color: white;
+            padding: 15px;
+            text-align: center;
+            z-index: 1000; /* Ensure header is above other content */
+        }
+
+        .header img {
+            width: 50px;
+            height: auto;
+            margin-right: 10px;
+            vertical-align: middle; /* Align logo with text */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            margin-top: 100px; /* Space for the fixed header */
+            flex: 1; /* Allow the container to fill the remaining space */
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #333;
+            margin-top: 50px;
+        }
+
+        .verification-message h3 {
+            font-size: 1.5rem;
+            margin-top: 20px;
+            color: #333;
+        }
+
+        .verification-message p {
+            font-size: 1rem;
+            color: #777;
+            margin-top: 10px;
+        }
+
+        a {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 20px;
+            border-radius: 5px;
+            text-decoration: none; /* Remove underline from links */
+        }
+        
+        a:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-      <img src="{%static 'myapp/image/logo.jpg'%}" alt="TechWaste Logo" class="logo">
-      <h1>TECHWASTERECLAIM</h1>
+    <div class="header">
+        <img src="{% static 'myapp/image/logo.jpg' %}" alt="TechWaste Logo">
+        <span>TechWaste Reclaim</span>
+    </div>
+
+    <div class="container">
+        <h1>CLEAN RWANDA,🌥️🌥️🌨️ KEY OF PERSERVE ENVIRONMENT⛈️🌦️🌧️🌈! </h1>
         <h3>Verification Successful</h3>
         <p>Make money while you clean the environment.</p>
-        <a href="{%url 'started'%}">Get Started</a>
-    <img src="{%static 'myapp/image/boll.png'%}" alt=" " class="balloon-img">
+        <a href="{% url 'started' %}">Get Started</a>
+        <img src="{% static 'myapp/image/boll.png' %}" alt="Balloon Image" class="balloon-img">
+    </div>
 </body>
 </html>
-{%endblock content%}
+{% endblock content %}

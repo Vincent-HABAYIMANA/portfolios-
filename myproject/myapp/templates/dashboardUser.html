@@ -1,0 +1,510 @@
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechWaste Reclaim - Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* General Styles */
+        body {
+            display: flex;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #d0d0d0; /* Gray background */
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            width: 250px;
+            background-color: #333; /* Dark background */
+            color: white;
+            padding: 20px;
+            height: 100vh; /* Full height */
+            position: fixed; /* Fixed sidebar */
+        }
+
+        .sidebar h2 {
+            margin: 0 0 20px;
+            font-size: 24px;
+        }
+
+        .sidebar a {
+            color: #fff;
+            text-decoration: none;
+            display: block;
+            padding: 10px;
+            margin: 5px 0;
+            border-radius: 5px;
+            transition: background 0.3s;
+            cursor: pointer; /* Pointer on hover */
+        }
+
+        .sidebar a:hover {
+            background-color: #575757; /* Darker gray on hover */
+        }
+
+        /* Main Content Styles */
+        .main {
+            margin-left: 270px; /* Space for sidebar */
+            padding: 20px;
+            width: calc(100% - 270px); /* Responsive width */
+        }
+
+        .header {
+            display: flex;
+            justify-content: flex-end; /* Align items to the right */
+            align-items: center;
+            padding: 10px;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            padding: 10px;
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        /* Welcome Message */
+        .welcome-message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333; /* Dark gray text */
+        }
+
+        /* Help Section Styles */
+        .help-section {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+            padding: 15px;
+            background-color: white; /* White background for contrast */
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+
+        .contact-item {
+            margin-bottom: 10px;
+        }
+
+        .contact-item i {
+            margin-right: 10px;
+            color: #007BFF; /* Primary color */
+        }
+
+        a {
+            color: #007BFF;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        /* Overview Styles */
+        .overview {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .overview-item {
+            background-color: white; /* White background for contrast */
+            padding: 15px;
+            border-radius: 5px; /* Rounded corners */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            flex: 1; /* Allow items to grow */
+            margin-right: 10px; /* Space between items */
+            cursor: pointer; /* Pointer on hover */
+            transition: transform 0.2s; /* Smooth transition */
+        }
+
+        .overview-item:last-child {
+            margin-right: 0; /* Remove margin for last item */
+        }
+
+        .overview-item:hover {
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+
+        /* Amount Button Styles */
+        .amount-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        .amount-button {
+            background-color: #333; /* Dark button */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 15px;
+            width: 30%; /* Adjust width for three buttons */
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: background 0.3s;
+            text-align: center;
+        }
+
+        .amount-button:hover {
+            background-color: #575757; /* Darker gray on hover */
+        }
+
+        /* Floating Button Styles */
+        .request-button {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            background-color: #333; /* Dark button */
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s;
+        }
+
+        .request-button:hover {
+            background-color: #575757; /* Darker gray on hover */
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 60%;
+            background-color: rgba(0, 0, 0, 0.7); /* Black background with opacity */
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            width: 700px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .close-button {
+            background: transparent;
+            border: none;
+            font-size: 18px;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Profile Styles */
+        .profile {
+            background-color: #333; /* Dark background for profile */
+            color: white;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative; /* Position relative for dropdown */
+        }
+
+        .dropdown {
+            display: none; /* Hidden by default */
+            position: absolute;
+            right: 0;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000; /* Ensure it appears above other content */
+        }
+
+        .dropdown a {
+            color: #333; /* Dark text */
+            padding: 10px 15px;
+            text-decoration: none;
+            display: block;
+            border-bottom: 1px solid #ccc; /* Divider line */
+        }
+
+        .dropdown a:hover {
+            background-color: #f0f0f0; /* Light gray on hover */
+        }
+
+        /* Privacy Content Styles */
+        .privacy-content {
+            display: none; /* Hidden by default */
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <h2>TechWaste Reclaim</h2>
+        <a href="#" id="homeLink"><i class="fas fa-home"></i> Home</a>
+        <a href="#" id="notificationsLink"><i class="fas fa-bell"></i> Notifications</a>
+        <a href="#" id="settingsLink"><i class="fas fa-cogs"></i> Settings</a>
+        <a href="#" id="requestHistoryLink"><i class="fas fa-history"></i> Request History</a><!--
+        <a href="#" id="materialSuppliedLink"><i class="fas fa-boxes"></i> Material Supplied</a>-->
+        <a href="#" id="helpLink"><i class="fas fa-question-circle"></i> Help</a>
+        <a href="{% url 'home' %}" id="logoutLink"><i class="fas fa-sign-out-alt"></i> Logout</a>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="welcome-message">
+            <i class="fas fa-user"></i> Welcome, {{ user.Name }}{{payments.amo}}!
+        </div>
+        
+        <div class="header">
+            <div class="search-container">
+                <!--<input type="text" class="search-input" placeholder="Search...">-->
+                <div class="profile" onclick="toggleDropdown()">
+                    <i class="fas fa-user-circle"></i> Profile
+                </div>
+                <div class="dropdown" id="profileDropdown">
+                   <!-- <a href="{% url 'payment' %}"><i class="fas fa-eye"></i> View Profile</a>
+                  <a href="#"><i class="fas fa-cogs"></i> Settings</a>-->  
+                    <a href="{% url 'home' %}"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="amount-container"><!--
+            <button class="amount-button" id="totalAmountButton"><i class="fas fa-wallet"></i> Total Amount: $0</button>-->
+          <!--  <button class="amount-button" id="pendingMoneyButton"><i class="fas fa-hourglass-half"></i> Pending Money: $0</button>-->  
+            <a href="{% url 'started' pk=user.pk%}" class="amount-button"><i class="fas fa-plus-circle"></i> Add Request</a>
+        </div>
+
+        <!-- Overview Section -->
+        <div class="overview">
+            <div class="overview-item" onclick="openModal('notificationsModal')">
+                <h3><i class="fas fa-bell"></i> Notifications</h3>
+                <p>You currently have <span id="notificationCount">0</span> notifications.</p>
+            </div>
+            <div class="overview-item" onclick="openModal('requestHistoryModal')">
+                <h3><i class="fas fa-history"></i> Request History</h3>
+                <p>You have <span id="requestHistoryCount">{{wastes.count}}</span> requests in history.</p>
+            </div><!--
+            <div class="overview-item" onclick="openModal('materialSuppliedModal')">
+                <h3><i class="fas fa-boxes"></i> Materials Supplied</h3>
+                <p>You have supplied <span id="materialSuppliedCount">0</span> materials.</p>
+            </div>-->
+        </div>
+
+        <!-- Help Section -->
+        <div class="help-section" id="helpSection">
+            <h2>Help & Contact Us</h2>
+            <p>If you need assistance, please contact us through one of the following channels:</p>
+            <div class="contact-item">
+                <i class="fas fa-envelope"></i> 
+                 <a href="mailto:vincentpriest8@gmail.com"><strong>Email</strong></a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i> 
+                 <a href="https://wa.me/250789368709" target="_blank"><strong>WhatsApp</strong></a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-instagram"></i> 
+                 <a href="https://instagram.com/mrx_vin" target="_blank"><strong>Instagram</strong></a>
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-facebook"></i> 
+                 <a href="https://facebook.com/" target="_blank"><strong>Facebook</strong></a>
+            </div>
+        </div>
+    </main>
+
+    <!-- Floating Add Request button -->
+    <button class="request-button"><i class="fas fa-plus"><a href="{% url 'started' pk=user.pk%}"></a></i></button>
+
+    <!-- Modals -->
+    <div class="modal" id="notificationsModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('notificationsModal')">×</button>
+            <h2><i class="fas fa-bell"></i> Notifications</h2>
+            <ul>
+                <li>No new notifications</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('settingsModal')">×</button>
+            <h2><i class="fas fa-cogs"></i> Settings</h2>
+            <ul>
+               <!-- <a href="" id="updateProfileLink"><li><i class="fas fa-user-edit"></i> Update Profile</li></a>
+                <a href="" id="changePasswordLink"><li><i class="fas fa-lock"></i> Change Password</li></a>   
+                <a href="" id="aboutLink"><li><i class="fas fa-info-circle"></i> About</li></a>-->
+                <a href="#" id="privacyLink"><li><i class="fas fa-shield-alt"></i> Privacy</li></a>
+            </ul>
+            <div class="privacy-content" id="privacyContent">
+                <h3>Privacy Policy</h3>
+                <p>Your privacy is very important to us. We are committed to protecting your personal information and your right to privacy. This privacy policy explains how we collect, use, and disclose your information when you use our services.</p>
+                <h4>Information We Collect</h4>
+                <p>We may collect information such as your name, email address, and other personal details when you register or interact with our services.</p>
+                <h4>How We Use Your Information</h4>
+                <p>Your information helps us provide and improve our services, communicate with you, and respond to your inquiries.</p>
+                <h4>Disclosure of Your Information</h4>
+                <p>We do not sell your personal information to third parties. We may share your information with trusted partners to help us operate our services.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal" id="requestHistoryModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('requestHistoryModal')">×</button>
+            <h2><i class="fas fa-history"></i> Request History</h2>
+            <table id="pickupTable">
+                <thead>
+                    <tr>
+                        <th>Item Name</th>
+                        <th>Category</th>
+                        <th>Collector Name</th>
+                        
+                        
+                    </tr>
+                </thead>
+                <tbody>
+                    
+        {%for waste in wastes%}
+                    <tr>
+                        <td>{{ waste.item_name }}</td>
+                        <td>{{ waste.category }}</td>
+                        <td>{{ waste.NameCollector }}</td>
+                    </tr>
+                    
+                    <tr>
+                        {%empty%}
+                        <td colspan="6">No  waste submissions.</td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+<!--
+    <div class="modal" id="materialSuppliedModal">
+        <div class="modal-content">
+            <button class="close-button" onclick="closeModal('materialSuppliedModal')">×</button>
+            <h2><i class="fas fa-boxes"></i> Material Supplied</h2>
+            <ul>
+                <li>Material Type: Plastic</li>
+                <li>Quantity: 100 kg</li>
+                <li>Date: 01/12/2024</li>
+            </ul>
+        </div>
+    </div>-->
+
+    <!-- JavaScript -->
+    <script>
+        // Mock API response
+        const fetchData = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve({
+                        totalAmount: 0,
+                        pendingMoney: 0,
+                        notifications: 3, // Example data
+                        requestHistory: {{wastes.count}}, // Example data
+                        materialsSupplied: 5 // Example data
+                    });
+                }, 1000); // Simulate network delay
+            });
+        };
+
+        // Fetch and update amounts and overview counts
+        const updateDashboard = async () => {
+            const data = await fetchData();
+            document.getElementById('totalAmountButton').innerText = `Total Amount: $${data.totalAmount}`;
+            document.getElementById('pendingMoneyButton').innerText = `Pending Money: $${data.pendingMoney}`;
+            document.getElementById('notificationCount').innerText = data.notifications;
+            document.getElementById('requestHistoryCount').innerText = data.requestHistory;
+            document.getElementById('materialSuppliedCount').innerText = data.materialsSupplied;
+        };
+
+        // Call the function to fetch and update data on page load
+        window.onload = () => {
+            updateDashboard();
+        };
+
+        // Modal functions
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'flex';
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
+        }
+
+        // Dropdown toggle
+        function toggleDropdown() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+        }
+
+        // Show/hide Help section
+        document.getElementById('helpLink').addEventListener('click', function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const helpSection = document.getElementById('helpSection');
+            helpSection.style.display = helpSection.style.display === 'block' ? 'none' : 'block'; // Toggle visibility
+        });
+
+        // Click outside to close dropdown
+        document.addEventListener('click', function(event) {
+            const dropdown = document.getElementById('profileDropdown');
+            if (!event.target.closest('.profile') && !event.target.closest('.dropdown')) {
+                dropdown.style.display = 'none'; // Close dropdown if clicking outside
+            }
+        });
+
+        // Event listeners for sidebar links
+        document.getElementById('homeLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert("Welcome to the Home section!");
+        });
+
+        document.getElementById('notificationsLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal('notificationsModal');
+        });
+
+        document.getElementById('settingsLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal('settingsModal');
+        });
+
+        
+        document.getElementById('requestHistoryLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal('requestHistoryModal');
+        });
+
+        document.getElementById('materialSuppliedLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            openModal('materialSuppliedModal');
+        });
+
+        // Function to handle privacy link toggle
+        document.getElementById('privacyLink').addEventListener('click', function(event) {
+            event.preventDefault();
+            const privacyContent = document.getElementById('privacyContent');
+            privacyContent.style.display = privacyContent.style.display === 'block' ? 'none' : 'block'; // Toggle visibility
+        });
+    </script>
+</body>
+</html>
+{% endblock content %}

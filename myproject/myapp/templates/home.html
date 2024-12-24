@@ -1,201 +1,227 @@
 {% load static %}
-{%block content%}
+{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TechWaste Reclaim</title>
- <style>
-  /* General Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  background-color: #f8f8f8;
-  color: #333;
-}
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+    }
 
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
-}
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
 
-/* Header Section */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  border-bottom: 2px solid #ccc;
-}
+    /* Header Section */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 2px solid #ccc;
+    }
 
-.logo img {
-  height: 80px;
-}
+    .logo img {
+      height: 80px;
+    }
 
-.title {
-  font-size: 24px;
-  font-weight: 600;
-  text-transform: uppercase;
-  color: #000;
-}
+    .title {
+      font-size: 24px;
+      font-weight: 600;
+      text-transform: uppercase;
+      color: #000;
+    }
 
-.user-icons {
-  display: flex;
-  gap: 20px;
-}
+    /* Main Section */
+    .main {
+      margin-top: 20px;
+    }
 
-.user {
-  text-align: center;
-  font-size: 14px;
-}
+    .info-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border: 2px solid #ccc;
+      border-radius: 10px;
+      background-color: #fff;
+    }
 
-.user img {
-  width: 40px;
-  height: 40px;
-  margin-bottom: 5px;
-}
+    .info-text h2 {
+      font-size: 28px;
+      font-weight: 600;
+      line-height: 1.5;
+      color: #000;
+    }
 
-/* Main Section */
-.main {
-  margin-top: 20px;
-}
+    .info-text p {
+      font-size: 16px;
+      margin: 10px 0;
+      color: #666;
+    }
 
-.info-box {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  background-color: #fff;
-}
+    .button-box {
+      margin-top: 20px;
+    }
 
-.info-text h2 {
-  font-size: 28px;
-  font-weight: 600;
-  line-height: 1.5;
-  color: #000;
-}
+    .pickup-button {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      font-size: 16px;
+      font-weight: 500;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
 
-.info-text p {
-  font-size: 16px;
-  margin: 10px 0;
-  color: #666;
-}
+    .pickup-button:hover {
+      background-color: #0056b3;
+    }
 
-.button-box {
-  margin-top: 20px;
-}
+    .info-image img {
+      max-width: 100%;
+      height: auto;
+      opacity: 0.2;
+    }
 
-.pickup-button {
-  background-color: #007bff;
-  color: #fff;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
+    /* Services Section */
+    .services {
+      margin-top: 30px;
+      text-align: center;
+    }
 
-.pickup-button:hover {
-  background-color: #0056b3;
-}
+    .services h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 20px;
+    }
 
-.info-image img {
-  max-width: 100%;
-  height: auto;
-  opacity: 0.2;
-}
+    .service-cards {
+      display: flex;
+      justify-content: space-around;
+    }
 
-/* Services Section */
-.services {
-  margin-top: 30px;
-  text-align: center;
-}
+    .service-card {
+      text-align: center;
+      background-color: #fff;
+      border: 2px solid #ccc;
+      padding: 15px;
+      border-radius: 10px;
+      width: 150px;
+      transition: transform 0.3s;
+    }
 
-.services h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
-}
+    .service-card img {
+      width: 60px;
+      height: 60px;
+      margin-bottom: 10px;
+    }
 
-.service-cards {
-  display: flex;
-  justify-content: space-around;
-}
+    .service-card p {
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none; /* Corrected spelling */
+    }
 
-.service-card {
-  text-align: center;
-  background-color: #fff;
-  border: 2px solid #ccc;
-  padding: 15px;
-  border-radius: 10px;
-  width: 150px;
-  transition: transform 0.3s;
-}
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: #007bff;
+    }
 
-.service-card img {
-  width: 60px;
-  height: 60px;
-  margin-bottom: 10px;
-}
+    .service-card a {
+      text-decoration: none;
+    }
 
-.service-card p {
-  font-size: 14px;
-  font-weight: 500;
-}
+    .service-card a:hover {
+      text-decoration: underline;
+    }
 
-.service-card:hover {
-  transform: translateY(-5px);
-  border-color: #007bff;
-}
+    /* Overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
 
- </style>
+    .overlay-content {
+      background: #fff;
+      color: #333;
+      padding: 30px;
+      border-radius: 10px;
+      text-align: center;
+      max-width: 500px;
+      width: 90%;
+    }
+
+    .overlay-content h2 {
+      margin-bottom: 20px;
+    }
+
+    .close-btn {
+      background-color: #007bff;
+      color: #fff;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      margin-top: 20px;
+    }
+
+    .close-btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     <!-- Header Section -->
     <header class="header">
       <div class="logo">
-        <img src="{%static 'myapp/image/logo.jpg'%}" alt="TechWaste Logo">
+        <img src="{% static 'myapp/image/logo.jpg' %}" alt="TechWaste Logo">
       </div>
       <h1 class="title">TECHWASTERECLAIM</h1>
-      <div class="user-icons">
-        <div class="user client">
-          <img src="client.png" alt=" ">
-          <span>Client</span>
-        </div>
-        <div class="user admin">
-          <img src="admin.png" alt=" ">
-          <span>Admin</span>
-        </div>
-      </div>
+      Welcome, {{ user.Name }}!
     </header>
 
     <!-- Main Section -->
     <main class="main">
       <div class="info-box">
         <div class="info-text">
-          <h2>How you can <br> Earn reward for <br> Recycling</h2>
-          <p>With you, we will help ecology</p>
+          <h2>{{ recycling_info.title|safe }}</h2>
+          <p>{{ recycling_info.subtitle|safe }}</p>
           <div class="button-box">
             <button class="pickup-button">
-              My Waste pick up <br>
-              <span>Request for pick up</span>
+              {{ recycling_info.button_text }} <br>
+              <span>{{ recycling_info.button_description }}</span>
             </button>
           </div>
         </div>
         <div class="info-image">
-          <img src="{%static 'myapp/image/recy.jpg'%}" alt="Recycling Bin">
+          <img src="{% static 'myapp/image/recy.jpg' %}" alt="Recycling Bin">
         </div>
       </div>
 
@@ -203,22 +229,49 @@ body {
       <section class="services">
         <h3>More services</h3>
         <div class="service-cards">
-          <div class="service-card"><a herf="{%url 'request1'%}">
-            <img src="{%static 'myapp/image/waste.jpg'%}" alt="Pick Waste Icon">
-            <p>Pick waste</p></a>
+          <div class="service-card">
+            <a href="{% url 'request' user.pk %}">
+              <img src="{% static 'myapp/image/waste.jpg' %}" alt="Pick Waste Icon">
+              <p>Pick waste</p>
+            </a>
           </div>
           <div class="service-card">
-            <img src="{%static 'myapp/image/moni.jpg'%}" alt="Get Money Icon">
-            <p>Get money</p>
+            <a href="">
+              <img src="{% static 'myapp/image/moni.jpg' %}" alt="Get Money Icon">
+              <p>Get money</p>
+            </a>
           </div>
-          <div class="service-card">
-            <img src="{%static 'myapp/image/pick.jpg'%}" alt="Recycling Icon">
+          <div class="service-card" id="recycling-btn">
+            <img src="{% static 'myapp/image/pick.jpg' %}" alt="Recycling Icon">
             <p>Recycling</p>
           </div>
         </div>
       </section>
     </main>
   </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="recycling-overlay">
+    <div class="overlay-content">
+      <h2>{{ recycling_overlay_info.title|default:"" }}</h2>
+      <p>{{ recycling_overlay_info.description|default:"" }}</p>
+      <button class="close-btn" id="close-overlay">Close</button>
+    </div>
+  </div>
+
+  <script>
+    const recyclingBtn = document.getElementById('recycling-btn');
+    const overlay = document.getElementById('recycling-overlay');
+    const closeBtn = document.getElementById('close-overlay');
+
+    recyclingBtn.addEventListener('click', () => {
+      overlay.style.display = 'flex';
+    });
+
+    closeBtn.addEventListener('click', () => {
+      overlay.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
-{%endblock content%}
+{% endblock content %}

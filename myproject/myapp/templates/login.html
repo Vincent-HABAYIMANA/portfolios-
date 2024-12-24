@@ -1,110 +1,200 @@
-{% load static %}
-{% block content %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - TechWaste Reclaim</title>
+    <title>Login Interface</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f6f9;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0; /* Light gray background */
+            color: #333; /* Dark gray text */
+        }
+
+        .sidebar {
+            width: 250px;
+            background-color: #333; /* Dark gray sidebar */
+            color: #fff;
             height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            padding: 20px 0;
+            margin: 0;
+            background-color: #222; /* Even darker gray */
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
             margin: 0;
         }
 
-        /* Container for form */
-        .login-container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            width: 90%;
-            max-width: 400px;
+        .sidebar ul li {
+            padding: 15px 20px;
+            border-bottom: 1px solid #444; /* Lighter gray */
+            cursor: pointer;
+            margin-bottom: 10px; /* Create space between <li> elements */
+        }
+
+        .sidebar ul li:hover {
+            background-color: #555; /* Slightly lighter gray for hover */
+        }
+
+        .main-content {
+            margin-left: 250px;
             padding: 20px;
         }
 
-        /* Title */
-        .login-container h1 {
-            color: #007bff;
-            font-size: 24px;
-            margin-bottom: 20px;
+        .login-options {
+            padding: 20px;
+            background-color: #f0f0f0;
+            border-radius: 8px;
             text-align: center;
+            margin-top: 20px;
         }
 
-        .login-container h2 {
-            color: #000000;
-            font-size: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        /* Input fields */
-        .login-container input[type="email"],
-        .login-container input[type="password"] {
-            width: 80%;
-            padding: 12px;
-            margin: 10px 0;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px; /* Adjusted font size */
-        }
-
-        /* Checkbox */
-        .login-container label {
-            display: flex;
-            align-items: center;
-            margin: 10px 0;
-        }
-
-        /* Login button */
-        .login-container button {
-            width: 30%; /* Adjusted width */
-            padding: 12px;
-            background-color: #023def;
-            color: white;
-            font-size: 15px;
+        .login-options button {
+            padding: 10px 15px;
+            background-color: #000; /* Black */
+            color: #fff; /* White text */
             border: none;
             border-radius: 5px;
+            width: 80%;
+            margin: 5px 0;
             cursor: pointer;
-            margin: 20px auto; /* Center button */
-            display: block; /* Make it a block element for centering */
+            font-size: 14px;
         }
 
-        .login-container button:hover {
-            background-color: #0126b3;
+        .login-options button:hover {
+            background-color: #444; /* Dark gray on hover */
         }
 
-        
+        .link {
+            color: #000; /* Black */
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            text-align: left;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+            color: #444; /* Dark gray on hover */
+        }
+
+        .login-form {
+            display: none;
+            padding: 20px;
+            background-color: #fff; /* White background */
+            border: 1px solid #ccc; /* Light gray border */
+            border-radius: 5px;
+            flex-grow: 1;
+            max-width: 400px;
+            margin: 20px auto;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 200px; /* Adjust sidebar width */
+            }
+
+            .main-content {
+                margin-left: 200px; /* Adjust margin */
+            }
+        }
+        input[type="email"] {
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        input[type="password"] {
+            width: 95%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .button[type="submit"] {
+            font-size: 16px;
+            color: #555;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h1>Login</h1>
-        <h2>Welcome to TechWaste Reclaim</h2>
-        <form action="/login" method="POST">
-            {%csrf_token%}
-            <input type="email" name="email" placeholder="Email or Phone Number" required>
-            <input type="password" name="password" placeholder="Enter Your Password" required>
-            <label>
-                <input type="checkbox" name="remember_me"> Remember Me
-            </label>
-            <button type="submit">Login</button>
-        </form>
-        <a href="#" class="forgot-password">Forgot Password?</a>
-        <p>Don't have an account? <a href="/signup" class="signup-link">Sign Up</a></p>
-        {% if messages %}
-        <div>
-            {% for message in messages %}
-                <p style="color: red;">{{ message }}</p>
-            {% endfor %}
-        </div>
-        {% endif %}
+
+    <div class="sidebar">
+        <h2>TechWaste Reclaim</h2>
+        <ul>
+            <li onclick="showLogin('admin')">Admin Login</li>
+            <li onclick="showLogin('collector')">Collector Login</li>
+        </ul>
     </div>
+
+    <div class="main-content">
+        <!-- Admin Login -->
+        <div class="login-form" id="admin">
+            <form method="POST" action="{% url 'role_login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="role" value="admin">
+                <h2>Admin Login</h2>
+                <input type="email" name="email" placeholder="Admin Email............." required><br><br>
+                <input type="password" name="password" placeholder="Admin Password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <!-- Collector Login -->
+        <div class="login-form" id="collector">
+            <form method="POST" action="{% url 'role_login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="role" value="collector">
+                <h2>Collector Login</h2>
+                <input type="email" name="email" placeholder="Collector Email..............." required><br><br>
+                <input type="password" name="password" placeholder="Collector Password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+            
+        </div>
+
+        <!-- User Login 
+        <div class="login-form" id="user">
+            <form method="POST" action="{% url 'role_login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="role" value="user">
+                <h2>User Login</h2>
+                <input type="email" name="email" placeholder="User Email" required><br><br>
+                <input type="password" name="password" placeholder="User Password" required><br><br>
+                <button type="submit">Login</button>
+            </form>
+            
+        </div>-->
+    </div>
+
+    <script>
+        function showLogin(role) {
+            const forms = document.querySelectorAll('.login-form');
+            forms.forEach(form => form.classList.remove('active'));
+            document.getElementById(role).classList.add('active');
+        }
+    </script>
+
 </body>
 </html>
-{% endblock content %}
